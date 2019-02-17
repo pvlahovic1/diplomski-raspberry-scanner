@@ -1,0 +1,24 @@
+{
+  "name": "diplomski-raspberry-scanner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "application.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pvlahovic1/diplomski-raspberry-scanner.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pvlahovic1/diplomski-raspberry-scanner/issues"
+  },
+  "homepage": "https://github.com/pvlahovic1/diplomski-raspberry-scanner#readme",
+  "dependencies": {
+    "noble": "^1.9.1",
+    "node-beacon-scanner": "^0.1.1"
+  }
+}
