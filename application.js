@@ -1,17 +1,30 @@
 const BeaconScanner = require("node-beacon-scanner");
+const configuration = require("./conf.json");
+const logger = require('./logger');
+const sender = require('./sender');
 
-var beaconScanner = new BeaconScanner();
+if (!configuration.listenerAddress) {
+	console.log("Property listenerAddress is not set");
+} else if (!configuration.listenerPort) {
+	console.log("Property listenerPort is not set");
+} else {
+	logger.log(">> Starting scanner application <<");
 
-beaconScanner.onadvertisement = (advertisement) => {
-	if (advertisement["beaconType"] === 'iBeacon') {
-		var beacon = advertisement["iBeacon"];
-		beacon.rssi = advertisement["rssi"];
-		console.log(JSON.stringify(beacon, null, " "));
-	}
-};
+	var beaconScanner = new BeaconScanner();
 
-beaconScanner.startScan().then(() => {
-    console.log("Scanning for BLE devices...")  ;
-}).catch((error) => {
-    console.error(error);
-});
+	beaconScanner.onadvertisement = (advertisement) => {
+		if (advertisement["beaconType"] === 'iBeacon') {
+			var beacon = advertisement["iBeacon"];
+			beacon.rssi = advertisement["rssi"];
+
+			var adress = configuration.listenerAddress + ":" + configuration.listenerPort;
+			sender.saveBeaconData(adress, JSON.stringify(beacon));
+		}
+	};
+
+	beaconScanner.startScan().then(() => {
+		logger.log("Scanning for BLE devices...");
+	}).catch((error) => {
+		logger.error(error);
+	});
+}

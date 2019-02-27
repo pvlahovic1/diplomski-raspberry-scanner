@@ -1,0 +1,9 @@
+{
+    "listenerAddress":"http://127.0.0.1",
+    "listenerPort":8080,
+
+    "logging": {
+        "logFile":"scanner-log1.log",
+        "format":"dd.mm.yyyy HH:MM:ss"
+    }
+}

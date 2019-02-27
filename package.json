@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/pvlahovic1/diplomski-raspberry-scanner#readme",
   "dependencies": {
+    "dateformat": "^3.0.3",
     "noble": "^1.9.1",
-    "node-beacon-scanner": "^0.1.1"
+    "node-beacon-scanner": "^0.1.1",
+    "request": "^2.88.0"
   }
 }
