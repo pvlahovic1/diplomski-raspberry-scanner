@@ -4,9 +4,11 @@ const logger = require('./logger');
 const sender = require('./sender');
 
 if (!configuration.listenerAddress) {
-	console.log("Property listenerAddress is not set");
+	console.log("Property listenerAddress is not set!");
 } else if (!configuration.listenerPort) {
-	console.log("Property listenerPort is not set");
+	console.log("Property listenerPort is not set!");
+} else if (!configuration.listenerPath) {
+	console.log("Property listenerPath is not set!");
 } else {
 	logger.log(">> Starting scanner application <<");
 
@@ -15,9 +17,10 @@ if (!configuration.listenerAddress) {
 	beaconScanner.onadvertisement = (advertisement) => {
 		if (advertisement["beaconType"] === 'iBeacon') {
 			var beacon = advertisement["iBeacon"];
-			beacon.rssi = advertisement["rssi"];
+			beacon.records = [{ "rssi":advertisement["rssi"], "txPower": beacon.txPower}];
+			delete beacon.txPower;
 
-			var adress = configuration.listenerAddress + ":" + configuration.listenerPort;
+			var adress = configuration.listenerAddress + ":" + configuration.listenerPort + configuration.listenerPath;
 			sender.saveBeaconData(adress, JSON.stringify(beacon));
 		}
 	};

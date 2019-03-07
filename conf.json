@@ -1,9 +1,10 @@
 {
     "listenerAddress":"http://127.0.0.1",
+    "listenerPath":"/beacon",
     "listenerPort":8080,
 
     "logging": {
-        "logFile":"scanner-log1.log",
+        "logFile":"scanner-log.log",
         "format":"dd.mm.yyyy HH:MM:ss"
     }
 }
