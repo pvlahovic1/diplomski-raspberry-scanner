@@ -1,6 +1,6 @@
 {
     "listenerAddress":"http://127.0.0.1",
-    "listenerPath":"/beacon",
+    "listenerPath":"/beacons",
     "listenerPort":8080,
 
     "logging": {
