@@ -12,9 +12,7 @@ function saveBeaconData(address, data) {
             'Content-Type': 'application/json'
         }
     }, (error, response, body) => {
-        if (!error && response.statusCode == 200) {
-            logger.log(body);
-        } else {
+        if (error) {
             logger.log(error);
         }
     });
