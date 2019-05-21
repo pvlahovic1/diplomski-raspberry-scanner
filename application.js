@@ -12,15 +12,14 @@ if (!configuration.listenerAddress) {
 } else {
 	logger.log(">> Starting scanner application <<");
 
+	var address = configuration.listenerAddress + ":" + configuration.listenerPort + configuration.listenerPath;
 	var beaconScanner = new BeaconScanner();
 
 	beaconScanner.onadvertisement = (bleData) => {
 		if (bleData["beaconType"] === 'iBeacon') {
 			var beacon = bleData["iBeacon"];
-			beacon.records = [{"rssi" : bleData["rssi"], "txPower": beacon.txPower}];
-			delete beacon.txPower;
+			beacon.records = [{"rssi" : bleData["rssi"], "txPower": -beacon.txPower}];
 
-			var address = configuration.listenerAddress + ":" + configuration.listenerPort + configuration.listenerPath;
 			httpSender.saveBeaconData(address, JSON.stringify(beacon));
 		}
 	};
